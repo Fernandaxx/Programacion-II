@@ -1,0 +1,61 @@
+ORG 1000h ; memoria de datos
+;variables inciso a
+;V1 DB 'A'
+;V2 DB 'A'
+boolean DB ?
+cadena DB "ARENNERA"
+fin_cad DB ?
+cont DB 0
+
+ORG 3000h ; subritina
+
+EQUALS:
+PUSH BX ; reutilizable
+PUSH AX
+MOV DL, 0 ; si es falso(no son iguales)
+MOV BX, AX ; copio dir caracter1 a BX
+MOV AL, [BX]; copio valor en AL
+MOV BX, CX; copio dir caracter2 a BX
+MOV AH,[BX]; copio valor en AH
+CMP AL,AH
+JNZ FIN; si no son iguales 
+MOV DL, 0FFh; si son iguales
+FIN:
+
+MOV BX,SP
+ADD BX,6
+MOV [BX],DL 
+POP AX 
+POP BX
+RET
+
+
+ORG 2000h ; memoria de instrucciones Ppal
+;inciso a
+;MOV AX, OFFSET V1
+;MOV CX, OFFSET V2
+
+MOV AX,OFFSET cadena ; INICIO CADENA
+MOV CX, OFFSET fin_CAD - 1 ; FINAL CADENA 
+MOV BL,0
+REPEAT:
+PUSH DX
+CALL EQUALS 
+POP DX
+MOV BOOLEAN,DL
+CMP BOOLEAN,00h
+JZ FIN_REPEAT
+INC BL
+INC AX
+DEC CX
+CMP AX,CX
+JS REPEAT
+
+
+FIN_REPEAT:
+MOV cont, BL
+
+HLT
+END
+
+

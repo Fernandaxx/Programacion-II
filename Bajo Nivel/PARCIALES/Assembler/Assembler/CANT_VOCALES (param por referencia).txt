@@ -1,0 +1,51 @@
+org 1000h
+string DB "aeropuerto"
+stringF DB 0
+vocales DB "AaEeIiOoUu"
+vocales_fin DB 0
+
+ORG 3000h
+ES_VOCAL: PUSH CX
+PUSH BX
+MOV BX, OFFSET vocales
+MOV CH, OFFSET vocales_fin - OFFSET vocales
+MOV AH, 0h
+LAZO: CMP CH,0
+JZ FIN
+DEC CH
+CMP AL, [BX]
+PUSHF
+INC BX
+POPF
+JNZ LAZO
+MOV AH,0FFh
+
+
+FIN: POP BX
+POP CX
+RET
+CANT_VOCALES: MOV CL, 0
+MOV CH, OFFSET stringF - OFFSET string
+MOV AL,[BX]
+
+LAZO2: CMP CH,0
+JZ FIN2
+CALL ES_VOCAL
+INC BX
+MOV AL,[BX]
+DEC CH
+CMP AH, 0FFh
+JNZ LAZO2
+INC CL
+JMP LAZO2
+
+FIN2: RET
+ORG 2000h
+MOV BX, OFFSET string
+
+CALL CANT_VOCALES
+
+
+
+hlt 
+end

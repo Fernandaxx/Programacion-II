@@ -1,0 +1,56 @@
+;EJ3 
+:IF
+           ORG 2000h
+           CMP AL, 4 ; 
+           JZ Then ; 
+           JMP Else ;
+Then:  MOV BL, 1 ;
+            INC CL ;
+            JMP Fin_IF ; 
+Else:    MOV BL, 2 ; 
+            DEC CL ; 
+Fin_IF: HLT ;
+            END
+
+;INTENTO DE FOR
+
+ORG 2000h
+  MOV AL,10
+  MOV CL,1
+FOR:  CMP 10,CL
+  JNS SUMA
+  JMP FIN
+  
+SUMA:  INC CL
+  ADD AL,AL
+  JMP FOR
+  FIN: HLT
+  END
+
+;EJ4
+
+ORG 1000h
+  NUM1 DW 50
+  NUM2 DW 55
+  RES  DW 0
+  MAX  DW 100
+
+ORG 2000h
+  MOV BX, OFFSET NUM1
+  MOV AX,[BX]
+  MOV BX,OFFSET NUM2
+  MOV CX,[BX]
+  ;ADD BX,OFFSET RES
+  ;MOV DX,[BX]
+  ADD AX,CX
+  MOV DX,AX
+ Volver: CMP DX,MAX
+  JZ  FIN
+  JS  FIN; 
+  DEC DX
+  JMP Volver
+
+FIN: MOV BX, OFFSET RES; guardo en memoria
+MOV [BX],DX
+HLT
+END

@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=GasNatural
+comment1.params=numMedidor\ tama\u00F1oHogar\ cantCalefactores\ numGestion\ fecha\ ingresosMensuales\ cantIntegrantesFam\ region\ persona
+comment1.target=GasNatural(int,\ double,\ int,\ java.lang.String,\ java.lang.String,\ double,\ int,\ java.lang.String,\ Persona)
+comment2.params=
+comment2.target=GasNatural()
+comment3.params=
+comment3.target=double\ getTama\u00F1oHogar()
+comment4.params=
+comment4.target=double\ ValorTarifaSubsidiada()
+comment5.params=
+comment5.target=boolean\ AccesoSubsidio()
+comment6.params=
+comment6.target=java.lang.String\ toString()
+numComments=7

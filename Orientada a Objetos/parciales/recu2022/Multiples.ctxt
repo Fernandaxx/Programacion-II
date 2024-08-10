@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Multiples
+comment1.params=numeroCompra\ categoria\ nombreEstadio\ fecha\ importe
+comment1.target=Multiples(int,\ int,\ java.lang.String,\ Fecha,\ double)
+comment2.params=
+comment2.target=Multiples()
+comment3.params=
+comment3.target=boolean\ entradasCompletas()
+comment4.params=asiento
+comment4.target=void\ agregarEntrada(int)
+comment5.params=
+comment5.target=double\ promocion()
+numComments=6

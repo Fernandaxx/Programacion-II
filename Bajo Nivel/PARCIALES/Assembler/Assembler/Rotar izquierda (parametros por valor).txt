@@ -1,0 +1,30 @@
+org 1000h
+num1 DB 00001101B
+rotPos DB 2h
+res DB ?
+
+org 3000h
+ROTARIZQ: CMP AH,0
+JZ FINROT
+LAZOROT: ADD AL, AL
+DEC AH
+JNZ LAZOROT
+MOV res,AL
+
+FINROT: RET
+org 2000h
+MOV AL, num1
+MOV AH, rotPos
+PUSH DX ; Guardo el contexto del programa
+PUSH CX
+PUSH BX
+PUSH AX
+CALL ROTARIZQ
+POP AX ;Recupero el contexto del programa
+POP BX
+POP CX
+POP DX
+
+
+hlt 
+end

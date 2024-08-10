@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=ejer4
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=vector
+comment2.target=int\ getGanadosRiver(Partido[])
+comment3.params=vector
+comment3.target=int\ getGolesBocaLocal(Partido[])
+comment4.params=vector
+comment4.target=double\ getPorcentajeEmpate(Partido[])
+numComments=5

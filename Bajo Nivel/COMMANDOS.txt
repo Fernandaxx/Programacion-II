@@ -1,0 +1,22 @@
+OFFSET obtiene la direccion de una etiqueta
+WORD PTR  Esta parte de la instrucción indica que se trata de una operación de transferencia de una palabra (16 bits) en lugar de un byte (8 bits). 
+
+Carry : Se establece en 1 si una operación genera un acarreo desde el bit más significativo o se presta un acarreo. En otras palabras, 
+es útil para detectar desbordamientos
+
+Zero:  Esta bandera se establece en 1 si el resultado de una operación es igual a cero. Si el resultado es distinto de cero, se establece en 0
+
+Signo: efleja el bit más significativo (el bit de signo) del resultado de una operación. Si el bit más significativo es 1, entonces SF se establece en 1,
+ indicando un resultado negativo.
+
+Overflow:se utiliza para detectar desbordamientos en operaciones aritméticas con signo. Se establece en 1 si el resultado de una operación aritmética no se puede representar con los bits disponibles. 
+Por ejemplo, en la suma de dos números negativos que da como resultado un número positivo.
+
+
+
+CMP: Compara los valores en. Si son iguales, se salta a la siguiente instrucción
+
+
+JS (Salto si Signo)
+JNZ (Salto si No Cero) 
+JZ (Salto si Cero) 

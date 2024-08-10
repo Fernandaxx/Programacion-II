@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Simple
+comment1.params=dni\ nombreApellido\ numeroAsiento\ numeroCompra\ categoria\ nombreEstadio\ fecha\ importe
+comment1.target=Simple(int,\ java.lang.String,\ int,\ int,\ int,\ java.lang.String,\ Fecha,\ double)
+comment2.params=
+comment2.target=Simple()
+comment3.params=
+comment3.target=double\ promocion()
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5

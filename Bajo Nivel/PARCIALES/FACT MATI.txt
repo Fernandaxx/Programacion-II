@@ -1,0 +1,62 @@
+org 1000h
+Tabla db 2,5,4,7,3
+fin DB ?
+
+org 3000h
+FACT: PUSH AX; Guardar registros
+PUSH BX
+PUSH CX
+PUSH DX
+MOV BL, [BX] ; Cargar el valor de N en BX
+MOV BH,0
+CMP BL,0
+JZ MUEVO
+CMP BL, 1
+JZ MUEVO
+MOV AL, 1 ; factorial lo pongo en 1
+MOV CL, 2 ; CL ES I
+INC BL
+Lazo: MOV DL,0 ; suma := 0
+MOV CH,1;J LO PONGO EN UNO
+Lazo2: ADD DL, CL
+DEC AL
+JNZ Lazo2
+MOV AL, DL
+INC CL
+CMP CL,BL
+JNZ Lazo
+JMP FIN
+MUEVO:MOV AL, 1
+FIN: POP DX
+POP CX
+MOV CH,1; LO PONGO EN UNO
+Lazo2: ADD DL, CL
+DEC AL
+JNZ Lazo2
+MOV AL,DL
+INC CL
+CMP CL,BL
+JNZ Lazo
+JMP FIN
+MUEVO:MOV AL,1
+FIN: POP DX
+POP CX
+POP BX
+MOV [BX],AL
+POP AX
+RET ; Retornar al programa principal
+
+org 2000h
+MOV DL ,OFFSET fin- OFFSET Tabla
+MOV BX, OFFSET Tabla
+REPIT:PUSH DX
+MOV DX,0
+CMP BYTE PTR [BX],6
+JNS SALTO
+CALL FACT
+SALTO:INC BX
+POP DX
+DEC DX
+JNZ REPIT
+FINAL:hlt
+end

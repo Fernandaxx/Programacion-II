@@ -1,0 +1,27 @@
+ORG 1000h
+num1 DW 200h
+num2 DW 2h
+resto DW 0h
+
+ORG 3000h
+MOD: PUSH DX
+PUSH CX
+
+CMP DX,0
+JZ FIN
+
+; 
+
+
+FIN: POP CX
+POP DX
+RET
+
+ORG 2000h
+MOV CX, num1
+MOV DX, num2
+
+CALL MOD
+
+hlt 
+end

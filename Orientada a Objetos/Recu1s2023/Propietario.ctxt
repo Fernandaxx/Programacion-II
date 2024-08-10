@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Propietario
+comment1.params=
+comment1.target=Propietario()
+comment2.params=NombreApellido\ cuit
+comment2.target=Propietario(java.lang.String,\ int)
+comment3.params=
+comment3.target=java.lang.String\ toString()
+numComments=4

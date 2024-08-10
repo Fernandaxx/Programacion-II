@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Solicitud
+comment1.params=numGestion\ fecha\ ingresosMensuales\ cantIntegrantesFam\ region\ persona
+comment1.target=Solicitud(java.lang.String,\ java.lang.String,\ double,\ int,\ java.lang.String,\ Persona)
+comment2.params=
+comment2.target=Solicitud()
+comment3.params=
+comment3.target=double\ getIngresosMensuales()
+comment4.params=
+comment4.target=int\ getCantIntegrantesFam()
+comment5.params=
+comment5.target=java.lang.String\ getRegion()
+comment6.params=
+comment6.target=double\ TarifaPlena()
+comment7.params=
+comment7.target=double\ ValorTarifaSubsidiada()
+comment8.params=
+comment8.target=boolean\ AccesoSubsidio()
+comment9.params=
+comment9.target=java.lang.String\ toString()
+numComments=10

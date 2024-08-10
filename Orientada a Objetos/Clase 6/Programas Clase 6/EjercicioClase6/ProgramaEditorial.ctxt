@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=ProgramaEditorial
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=cod\ pag\ anio\ resumen\ responsable
+comment2.target=Revista\ leerRevista(int,\ int,\ int,\ java.lang.String,\ Responsable)
+comment3.params=cod\ pag\ anio\ resumen\ responsable
+comment3.target=Libro\ leerLibro(int,\ int,\ int,\ java.lang.String,\ Responsable)
+numComments=4

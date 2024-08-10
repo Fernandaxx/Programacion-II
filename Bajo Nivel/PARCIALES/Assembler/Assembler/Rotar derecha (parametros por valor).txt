@@ -1,0 +1,43 @@
+org 1000h
+num1 DB 00001101B
+rotPos DB 2h
+res DB ?
+
+org 3000h
+ROTARDER: CMP CL,0
+JZ FINDER
+LAZO: CMP CL,0
+JZ FINDER
+MOV AH, 7 ; n-1 rotaciones a la izquierda (n siendo los bits de num1)
+CALL ROTARIZQ
+DEC CL
+JMP LAZO
+
+FINDER:RET
+
+
+ROTARIZQ: CMP AH,0
+JZ FINROT
+LAZOROT: ADD AL, AL
+ADC Al, 0
+DEC AH
+JNZ LAZOROT
+MOV res,AL
+
+FINROT: RET
+org 2000h
+MOV AL, num1
+MOV CL, rotPos
+PUSH DX ; Guardo el contexto del programa
+PUSH CX
+PUSH BX
+PUSH AX
+CALL ROTARDER
+POP AX ;Recupero el contexto del programa
+POP BX
+POP CX
+POP DX
+
+
+hlt 
+end

@@ -1,0 +1,15 @@
+;IF
+
+ORG 2000H
+    CMP AL,4
+    JZ THEN
+    JMP ELSE
+THEN:
+    MOV BL,1
+    INC CL
+    JMP FIN
+ELSE: 
+    MOV BL,2
+    DEC CL
+ FIN: HLT
+END

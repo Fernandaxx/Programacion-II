@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Automotor
+comment1.params=patente\ descripcion\ a\u00F1o\ importe\ propietario
+comment1.target=Automotor(java.lang.String,\ java.lang.String,\ int,\ double,\ Propietario)
+comment2.params=
+comment2.target=double\ CalcularCostoImpuestos()
+numComments=3

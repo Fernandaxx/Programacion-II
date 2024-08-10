@@ -1,0 +1,378 @@
+{-----------------------------------------------------------------------------
+Agregar Arbol - Agrega un entero a un arbol ABO, sin repetidos }
+
+Procedure insertar(Var a: arbol; num:integer);
+Begin
+  If (a = Nil)Then
+    Begin
+      new (a);
+      a^.dato := num;
+      a^.HI := Nil;
+      a^.HD := Nil;
+    End
+  Else
+    If a^.dato> num Then
+      insertar(a^.HI, num)
+  Else
+    If a^.dato< num Then
+      insertar(a^.HD, num)
+End;
+
+
+------------------------------------------------------------------------------------
+
+
+//Recorrido PRE-Orden // lee-izq-der
+
+Procedure PreOrden (a:arbol);
+Begin
+  If (a <> Nil) Then
+    Begin
+      Write(a^.dato, ' ');
+      PreOrden(a^.HI);
+      PreOrden(a^.HD);
+    End;
+End;
+
+------------------------------------------------------------------------------------
+
+//Recorrido EN-Orden // izq-lee-der
+
+
+Procedure EnOrden (a:arbol);
+Begin
+  If (a <> Nil) Then
+    Begin
+      EnOrden(a^.HI);
+      Write(a^.dato, ' ');
+      EnOrden(a^.HD);
+    End;
+End;
+
+
+------------------------------------------------------------------------------------
+
+//Recorrido POST-Orden  // izq-der-lee
+
+
+Procedure PostOrden (a:arbol);
+
+Begin
+  If (a <> Nil) Then
+    Begin
+      PostOrden(a^.HI);
+      PostOrden(a^.HD);
+      Write(a^.dato,' ');
+    End;
+End;
+
+
+------------------------------------------------------------------------------------
+
+//MaxArbol- recibe un árbol y devuelva el valor maximo. si el árbol es vacío, retornar -1
+
+
+Function VerMax (a:arbol):   Integer;
+Begin
+  If (a=Nil) Then
+    VerMax := -1
+  Else
+    Begin
+      If (a^.HD <> Nil) Then
+        VerMax := VerMax(a^.HD)
+      Else
+        VerMax := a^.dato;
+    End;
+End;
+
+
+------------------------------------------------------------------------------------
+
+{Maximo recorriendo todo el arbol}
+Procedure MaxTweets (a:arbol; Var max:integer; Var nom:String);
+Begin
+  If (a <> Nil) Then
+    Begin
+	If (a^.dato.Total > max) Then
+        Begin
+          max := a^.dato.Total;
+          nom := a^.dato.nombreUsuario;
+        End;
+      MaxTweets(a^.HD,max,nom);
+      MaxTweets(a^.HI,max,nom);
+    End;
+End;
+
+
+
+------------------------------------------------------------------------------------
+
+
+//MinArbol- recibe un árbol y devuelva el valor mínimo. si el árbol es vacío, retornar -1.
+
+
+Function VerMin (a:arbol):   Integer;
+Begin
+  If (a=Nil) Then
+    VerMin := -1
+  Else
+    Begin
+      If (a^.HI <> Nil) Then
+        VerMin := VerMin(a^.HI)
+      Else
+        VerMin := a^.dato;
+    End;
+End;
+
+
+------------------------------------------------------------------------------------
+
+{Minimo recorriendo todo el arbol}
+Procedure MinIntervenciones (a:arbol; Var min:integer; Var direc:String);
+Begin
+  If (a <> Nil) Then
+    Begin
+      MinIntervenciones(a^.HI,min,direc);
+      If (a^.dato.totalIntevenciones < min) Then
+        Begin
+          min := a^.dato.totalIntevenciones;
+          direc := a^.dato.infoCliente.direccion;
+        End;
+      MinIntervenciones(a^.HD,min,direc);
+    End;
+End;
+
+
+
+------------------------------------------------------------------------------------
+
+
+// Contar pero como funcion, para retornar un valor solo
+function contar(a: arbol; algo): integer
+var cant:integer;
+begin
+  cant := 0;
+  if (a <> nil) then begin
+    if (a^.dato = algo) then
+      cant := cant + 1;
+    cant := cant + contar(a^.HI, algo);
+    cant := cant + contar(a^.HD, algo);
+  end;
+  contar := cant;
+end;
+
+------------------------------------------------------------------------------------
+
+//BuscarEnArbol - busca un dato (integer) en el arbol y devuelve el puntero de su ubicacion o nil si no lo encontro}
+
+Function Buscar(a:arbol;d:Integer):   arbol;
+Begin
+  If (a = Nil) Or (d = a^.dato)  Then
+    buscar := a
+  Else
+    Begin
+      If (a^.dato > d) Then
+        Buscar := Buscar(a^.HI,d)
+      Else
+        Buscar := Buscar(a^.HD,d);
+    End;
+End;
+
+
+
+------------------------------------------------------------------------------------
+
+
+Procedure BusquedaAcotada (a:arbol; inf:integer; sup:integer);
+
+Begin
+  If (a <> Nil) Then
+    If (a^.dato >= inf) Then
+      Begin
+        If (a^.dato <= sup) Then
+          Begin
+            write(a^.dato, ' ');
+            busquedaAcotada(a^.HI, inf, sup);
+            busquedaAcotada (a^.HD, inf, sup);
+          End
+        Else
+          busquedaAcotada(a^.HI, inf, sup);
+        // poda el arbol derecho
+      End
+  Else
+    busquedaAcotada(a^.HD, inf, sup);
+  // poda el arbol izquierdo
+
+End;
+
+
+------------------------------------------------------------------------------------
+
+
+Procedure BorrarArbol(Var a: arbol);
+Begin
+  If a <> Nil Then { Si queda algo que borrar }
+    Begin
+      BorrarArbol(a^.HI); { Borra la izqda recursivamente }
+      dispose(a); { Libera lo que ocupaba el nodo }
+      BorrarArbol(a^.HD); { Y luego va por la derecha }
+    End;
+End;
+
+
+
+------------------------------------------------------------------------------------
+
+
+{Buscar dato en un arbol ordenado por el dato, devuelve -1 si no lo encontro}
+Procedure BuscarDNI (a:arbol; dni: LongInt; Var alu:alumno);
+Begin
+  If (a <> Nil) Then
+    Begin
+      If (a^.dato.dni = dni) Then
+        alu := a^.dato
+      Else
+        Begin
+          If (a^.dato.dni > dni) Then
+            BuscarDNI(a^.HI,dni,alu)
+          Else BuscarDNI(a^.HD,dni,alu);
+        End;
+    End
+  Else
+    alu.dni := -1 // no se encontro
+End;
+
+
+
+
+{-----------------------------------------------------------------------
+Devuelve el nodo minimo del arbol}
+Function min (a:arbol): arbol;
+Begin
+  If (a = Nil) Then
+    min := Nil
+  Else
+    If (a^.HI = Nil) Then
+      min := a
+  Else min := min(a^.HI)
+End;
+
+
+
+------------------------------------------------------------------------------------
+
+Procedure EliminarNodo (Var a:arbol; num:Integer; Var exito:Boolean);
+
+Var 
+  aux: arbol;
+Begin
+  If (a = Nil) Then exito := False
+  Else
+    Begin
+      If (a^.dato > num) Then
+        EliminarNodo(a^.HI,num,exito)
+      Else
+        If (a^.dato < num) Then
+          EliminarNodo(a^.HD,num,exito)
+      Else
+        Begin
+          exito := True;
+          If (a^.HI = Nil) Then // solo tiene hijo derecho
+            Begin
+              aux := a;
+              a := a^.HD;
+              Dispose(aux);
+            End
+          Else
+            If (a^.HD = Nil) Then // solo tiene hijo izq
+              Begin
+                aux := a;
+                a := a^.HI;
+                Dispose(aux);
+              End
+          Else  // tiene dos hijos
+            Begin
+              aux := min(a^.HD);
+              a^.dato := aux^.dato;
+              EliminarNodo(a^.HD,a^.dato,exito);
+            End;
+        End;
+    End;
+End;
+
+
+
+
+
+------------------------------------------------------------------------------------
+
+
+//InsertarNodo en un arbol binario con lista de datos que se repiten del principal
+Procedure InsertarArbol (Var a:arbol; e:encomienda);
+
+Begin
+  If (a = Nil) Then
+    Begin
+      new(a);
+      a^.peso := e.peso;
+      a^.lp := Nil;
+      AgregarLista(a^.lp,e.codigo);
+      a^.HI := Nil;
+      a^.HD := Nil;
+    End
+  Else
+    Begin
+      If (a^.peso > e.peso) Then
+        InsertarArbol(a^.HI,e)
+      Else
+        If (a^.peso< e.peso) Then
+          InsertarArbol(a^.HD,e)
+      Else  // es igual
+        AgregarLista(a^.lp,e.codigo);
+    End;
+End;
+
+
+------------------------------------------------------------------------------------
+
+
+{Insertar en arbol con contador}
+Procedure InsertarArbol (Var a:arbol; t:tweet);
+
+Begin
+  If (a = Nil) Then
+    Begin
+      new(a);
+      a^.dato.nombreUsuario := t.nombreUsuario;
+      a^.dato.codigoUsuario := t.codigoUsuario;
+      a^.dato.Total := 1;
+      a^.HI := Nil;
+      a^.HD := Nil;
+    End
+  Else
+    Begin
+      If (a^.dato.codigoUsuario > t.codigoUsuario) Then
+        InsertarArbol(a^.HI,t)
+      Else
+        If (a^.dato.codigoUsuario< t.codigoUsuario) Then
+          InsertarArbol(a^.HD,t)
+      Else
+        a^.dato.Total := a^.dato.Total + 1;
+
+    End;
+End;
+
+
+------------------------------------------------------------------------------------
+
+function existeDesordenado (a: arbol; v: string): boolean;
+begin
+  if (a=nil) then
+    existeDesordenado:=false
+  else if (v=a^.dato.titulo) then
+    existeDesordenado := true
+  else begin
+    if not (existeDesordenado(a^.HD,v)) then existeDesordenado:= existeDesordenado(a^.HI,v)
+    else existeDesordenado := true;
+  end  
+end;

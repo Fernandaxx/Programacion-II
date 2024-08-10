@@ -1,0 +1,22 @@
+org 1000h
+string DB "Holis asd%"
+fin DB "%"
+
+org 3000h
+
+CONCAR: MOV AL, 0
+MOV AH, fin
+FOR: CMP AH,[BX]
+JZ FINR
+INC AL
+INC BX
+JMP FOR
+FINR:RET
+org 2000h
+MOV BX, OFFSET string
+call CONCAR
+
+
+
+hlt
+end

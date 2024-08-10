@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Editorial
+comment1.params=nombre\ premios
+comment1.target=Editorial(java.lang.String,\ int)
+comment2.params=
+comment2.target=Editorial()
+comment3.params=
+comment3.target=boolean\ librosCompletos()
+comment4.params=libro
+comment4.target=void\ agregarLibro(Libro)
+comment5.params=
+comment5.target=java.lang.String\ toString()
+comment6.params=
+comment6.target=double\ montoTotal()
+numComments=7

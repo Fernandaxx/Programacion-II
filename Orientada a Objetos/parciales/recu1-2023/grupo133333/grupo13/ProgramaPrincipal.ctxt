@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=ProgramaPrincipal
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=codigo\ semestre\ alumno\ cantNotas
+comment2.target=Cursadas\ ingresoCursada(java.lang.String,\ java.lang.String,\ Alumno,\ int)
+numComments=3

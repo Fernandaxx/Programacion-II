@@ -1,0 +1,23 @@
+ORG 1000H
+NUM1_L DW 0ABCh
+NUM1_H DW 2034h
+NUM2_L DW 0Fh
+NUM2_H DW 0FFh
+ORG 2000h
+
+
+MOV AX, NUM1_L ; Low 1
+MOV BX, NUM1_H ; High 1
+MOV CX, NUM2_L ; Low 2
+MOV DX, NUM2_H ; High 2
+
+ADD AX,CX
+ADC BX, DX
+
+
+
+
+
+hlt 
+end
+

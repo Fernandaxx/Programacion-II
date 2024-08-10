@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Cursadas
+comment1.params=codigo\ semestre\ alumno
+comment1.target=Cursadas(java.lang.String,\ java.lang.String,\ Alumno)
+comment2.params=
+comment2.target=Cursadas()
+comment3.params=
+comment3.target=int\ getDiml()
+comment4.params=diml
+comment4.target=void\ setDiml(int)
+comment5.params=nota
+comment5.target=boolean\ cargarNotas(int)
+comment6.params=
+comment6.target=double\ promedio()
+comment7.params=
+comment7.target=double\ promedioNotas()
+comment8.params=
+comment8.target=java.lang.String\ toString()
+numComments=9

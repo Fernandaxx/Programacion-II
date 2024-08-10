@@ -1,0 +1,31 @@
+org 1000h
+letra DB "z"
+vocales DB "AaEeIiOoUu"
+vocales_fin DB 0
+
+ORG 3000h
+ES_VOCAL: MOV BX, OFFSET vocales
+MOV CH, OFFSET vocales_fin - OFFSET vocales
+MOV AH, 0h
+LAZO: CMP CH,0
+JZ FIN
+DEC CH
+CMP AL, [BX]
+PUSHF
+INC BX
+POPF
+JNZ LAZO
+MOV AH,0FFh
+
+
+FIN: RET
+
+ORG 2000h
+MOV AL, letra
+
+CALL ES_VOCAL
+
+
+
+hlt 
+end

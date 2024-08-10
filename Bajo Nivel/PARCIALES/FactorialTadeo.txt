@@ -1,0 +1,41 @@
+ORG 1000H; DATOS 
+NUM DB 3
+
+
+ORG 3000H ;SUBRUTINA
+FACTORIAL: MOV BX, AX ;En BX tengo la dir. del num
+MOV AL,[BX] ;En AL tengo el num. 5
+MOV AH, AL ;Tengo en AH num. 5
+MOV CL, AL ;iteraciones
+DEC AH
+MOV DL,0 ;resultado en DL
+
+FOR: CMP CL,1
+JZ FIN_FOR
+CALL MUL
+DEC CL
+MOV AH,CL
+DEC AH
+MOV AL,DL
+MOV DL, 0
+JMP FOR
+
+
+FIN_FOR: MOV [BX],AL
+RET
+
+;En AL, NUM1
+;En BL, NUM2
+;En DX el resultado
+MUL: ADD DL,AL
+DEC AH
+JNZ MUL
+
+RET
+FIN_F: RET 
+
+ORG 2000H ; PROGGRAMA
+MOV AX,OFFSET NUM
+CALL FACTORIAL 
+HLT
+END 

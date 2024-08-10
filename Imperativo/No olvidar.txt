@@ -1,0 +1,7 @@
+Inicializar
+/listas
+/listas internas
+/arboles
+
+Liberar memoria
+liberar lista si esta dentro de un arbol

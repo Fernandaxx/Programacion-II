@@ -1,0 +1,14 @@
+;FOR
+
+ ORG 2000h
+ MOV AL,10
+ MOV CL,0
+ MOV CH,10
+
+ For: ADD AL,AL
+  INC CL
+  CMP CH,CL
+  JNZ For
+HLT
+END
+ 

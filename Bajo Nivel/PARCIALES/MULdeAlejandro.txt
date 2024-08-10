@@ -1,0 +1,44 @@
+;datos
+ORG 1000H
+NUM1 DW 5H ;comienza en 1000H y termina en 1001H
+NUM2 DW 5H ;comienza en 1002H y termina en 1003H
+RES DW ? ;comienza en 1004H y termina en 1005H
+
+ORG 3000H ;subrutina
+MUL: PUSH BX ;apila BX en 3FF6H, preserva valor anterior
+MOV BX, SP ;asigna SP(3GG6H) en BX (BX apunta a pila)
+PUSH CX ;apila CX,AX,DX para preservar valores de quien llama a la subrutina. Es una buena practica de programacion. SP queda en 3FF0H
+PUSH AX
+PUSH DX
+ADD BX,6 ;desplaza 3 lugares en pila BX=3FFCH(NUM2)
+MOV CX,[BX] ;CX queda con el valor de NUM2
+ADD BX,2 ;desplaza 1 lugar en pila BX=3FFEH(NUM1)
+MOV AX,[BX] ;AX queda con el valor de NUM1
+SUMA: ADD DX, AX ;aculula valor de NUM1 en el resultado
+DEC CX ;decrementa veces restantes a sumar (NUM2)
+JNZ SUMA ;salta si CX(valor de NUM2) no llego a 0
+SUB BX,4 ;desplaza 2 lugares en pila BX=3FFA (dir.RES)
+MOV AX,[BX] ;asigna dir. de RES: [BX] <-> [3FFAH] <-> 1004H
+MOV BX,AX ;asigna dir. de RES a BX (1004H)
+MOV [BX],DX ;guarda resultado [BX] <-> [1004H] <-> DX <-> 15
+POP DX
+POP AX
+POP CX
+POP BX
+RET
+
+;programa
+ORG 2000H
+MOV AX,NUM1 ;asigna valor de NUM1(5H) a AX
+PUSH AX ;apila en dir. 3FFEH
+MOV AX,NUM2 ;asigna valor de NUM2(3H) a AX
+PUSH AX;apila en dir. 3FFCH
+MOV AX, OFFSET RES ;recupera direccion de RES(1004H)
+PUSH AX ;apila en dir. 3FFAH
+MOV DX,0 ;resultado inicial de multiplicacion en DX
+CALL MUL ;llama rutina, apila dir. retorno en 3FF8H
+POP AX ;desapila la misma cantidad que apilo
+POP AX
+POP AX
+HLT
+END

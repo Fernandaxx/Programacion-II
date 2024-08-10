@@ -1,0 +1,94 @@
+org 1000h
+; variables 
+string DB "Ludmi<3"
+stringF DB ?
+vocales DB "AaEeIiOoUu"
+vocales_fin DB ?
+vocalesTot DB 0
+MASK EQU 00000001B
+org 3000h
+SWAP: PUSH CX
+MOV CL, [BX]
+PUSH BX
+MOV BX,AX
+MOV CH, [BX]
+MOV [BX], CL
+POP BX
+MOV [BX],CH
+POP CX
+RET
+es_vocal:PUSH CX
+PUSH BX
+PUSH AX
+MOV BX,SP
+ADD BX,8
+MOV CH, [BX]
+MOV BX, OFFSET vocales
+MOV AH, OFFSET vocales_fin - OFFSET vocales
+MOV DL, 0h
+LAZO: CMP AH,0
+JZ FIN2
+DEC AH
+CMP CH, [BX]
+PUSHF
+INC BX
+POPF
+JNZ LAZO
+MOV DL,0FFh
+
+
+FIN2:POP AX
+POP BX
+POP CX
+RET
+esPar: AND DH, MASK
+RET
+org 2000h
+; código
+MOV AX, OFFSET string
+MOV BX, OFFSET stringF - 1
+MOV CH, 0 ; cantidad de vocales
+MOV DH, OFFSET stringF - OFFSET string
+
+lazo: CMP AX,BX
+JNS FIN
+call SWAP
+
+MOV CL, [BX]
+PUSH CX
+call es_vocal
+POP CX
+CMP DL, 0FFh
+JNZ CONTINUE
+INC CH
+CONTINUE: PUSH BX
+MOV BX,AX
+MOV CL, [BX]
+PUSH CX
+call es_vocal
+POP CX
+POP BX
+CMP DL, 0FFh
+JNZ CONTINUE2
+INC CH
+CONTINUE2: INC AX
+DEC BX
+JMP lazo
+
+
+
+FIN: call esPar ; Verifica si la string tiene numero de caracteres pares
+CMP DH,0
+JZ FIN3  ; Si es par ya proceso toda la string, si es impar todavia falta procesar la del medio
+
+MOV CL, [BX]
+PUSH CX
+call es_vocal
+POP CX
+CMP DL, 0FFh
+JNZ FIN3
+INC CH
+
+FIN3: MOV vocalesTot, CH
+hlt
+end

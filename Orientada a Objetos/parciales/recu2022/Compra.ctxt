@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=Compra
+comment1.params=numeroCompra\ categoria\ nombreEstadio\ fecha\ importe
+comment1.target=Compra(int,\ int,\ java.lang.String,\ Fecha,\ double)
+comment2.params=
+comment2.target=Compra()
+comment3.params=
+comment3.target=java.lang.String\ getNombreEstadio()
+comment4.params=
+comment4.target=int\ getCategoria()
+comment5.params=
+comment5.target=double\ getImporte()
+comment6.params=
+comment6.target=Fecha\ getFecha()
+comment7.params=importe
+comment7.target=void\ setImporte(double)
+comment8.params=
+comment8.target=java.lang.String\ toString()
+comment9.params=
+comment9.target=double\ promocion()
+numComments=10

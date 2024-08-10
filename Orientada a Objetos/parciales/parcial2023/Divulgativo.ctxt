@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Divulgativo
+comment1.params=tipo\ ISBN\ nombre\ cantPaginas\ precio\ fecha\ autor
+comment1.target=Divulgativo(java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ double,\ java.lang.String,\ Autor)
+comment2.params=
+comment2.target=Divulgativo()
+comment3.params=
+comment3.target=void\ CalcularDescuento()
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5

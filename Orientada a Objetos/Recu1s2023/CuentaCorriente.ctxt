@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=CuentaCorriente
+comment1.params=
+comment1.target=CuentaCorriente()
+comment2.params=limite\ cheques\ nroCuenta\ CBU\ alias\ dinero\ propietario
+comment2.target=CuentaCorriente(double,\ int,\ int,\ int,\ java.lang.String,\ double,\ Propietario)
+comment3.params=
+comment3.target=double\ Impuestos()
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5

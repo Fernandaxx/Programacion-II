@@ -1,0 +1,29 @@
+;Mem. de datos	
+ORG 1000H
+NUM1 DB 255
+NUM2 DB 30
+;Subrutina RESTO
+ORG 3000H
+RESTO: PUSH CX
+PUSH AX
+CMP CL, 0 ;La division x 0 no está definida
+JZ FIN
+CMP AL, 0
+JZ RES
+MOV DX, 0 ;La division está permitida
+JMP Lazo
+RES: MOV DX, 0 ;La operación da 0
+JMP FIN
+Lazo: SUB AL, CL
+CMP AL,CL
+JNC Lazo
+mov DL,AL
+FIN: POP AX
+POP CX
+RET
+ORG 2000H
+MOV AL, NUM1
+MOV CL, NUM2
+CALL RESTO
+HLT
+END

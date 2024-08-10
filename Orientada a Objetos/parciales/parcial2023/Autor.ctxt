@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Autor
+comment1.params=dni\ nombreApellido\ nacionalidad
+comment1.target=Autor(int,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=Autor()
+comment3.params=
+comment3.target=java.lang.String\ getNacionalidad()
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5

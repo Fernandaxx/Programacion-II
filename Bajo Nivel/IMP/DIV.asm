@@ -1,0 +1,20 @@
+ORG 1000h
+num1 DB 53
+num2 DB 5
+ORG 3000h
+DIV: MOV DL,0
+CMP AL,0
+JZ FIN
+LAZO: SUB AL,AH
+INC DL ; guardo la cantidad de veces que resto (resultado)
+CMP AL,AH
+JNS LAZO
+FIN: ;MOV AL,DL ; PARA QUE GUARDE EN AL Y NO EN DL
+RET
+
+ORG 2000h
+MOV AL,num1
+MOV AH,num2
+CALL DIV
+HLT
+END

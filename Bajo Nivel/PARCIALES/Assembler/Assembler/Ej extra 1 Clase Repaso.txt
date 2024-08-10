@@ -1,0 +1,88 @@
+org 1000h
+
+tablaA DB 1,20,5,4,30
+
+tablaF DB ?
+
+cant DB 0
+
+org 3000h
+
+subr:
+PUSH CX
+
+PUSH AX
+
+MOV BX, SP
+
+ADD BX, 6 ; Saltea la direccion de retorno + 2 
+
+MOV BX,[BX] ; Recupero la direccion desde la pila
+
+MOV AL,[BX] ; Obtengo el valor de la direccion de memoria, y lo paso a AX
+
+MOV AH, 0 ; Seteo en 0, el registro AH que lo voy a utilizar como la var res
+
+MOV CH, 0 ; variable i
+
+FOR: INC CH ; i++
+
+ADD AH,CH ; res += i
+
+CMP AL, CH ; AL es el byte que recibo por parametro, que lo comparo hasta que este se haga 0
+
+JZ FINR
+
+JMP FOR ; vuelvo al loop
+
+
+
+
+FINR: MOV [BX], AH
+
+POP AX
+
+POP CX
+
+RET
+
+
+org 2000h
+
+MOV BX, OFFSET tablaA ; Muevo la primera direccion de la tabla
+
+MOV CL, OFFSET tablaF - OFFSET tablaA ; Muevo la dimL a CL
+
+MOV CH, 0 ; Contador de modificaciones
+
+RECORRER: CMP CL,0
+
+JZ FIN
+
+MOV AL, [BX]
+
+CMP AL,20
+
+JNS FINAL2
+
+PUSH BX
+
+CALL subr
+
+POP BX
+
+INC CH
+
+FINAL2:INC BX
+
+DEC CL
+
+JMP RECORRER
+
+
+
+FIN: MOV cant, CH
+
+hlt
+
+end

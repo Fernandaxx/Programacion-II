@@ -1,0 +1,29 @@
+;datos
+ORG 1000H
+Letras DB "AaEeIiOoUu"
+Char DB 'I'
+
+ORG 3000H ;subrutina
+;En AL recibimos char
+;En BX recibimos las vocales
+;En AH obtenemos el resultado
+ES_VOCAL: MOV CL, 10
+LAZO: CMP CL,0
+JZ FINL
+CMP AL,[BX]
+JNZ SIGO
+MOV AH, 0FFH
+JMP FINR
+SIGO: INC BX
+DEC CL
+JMP LAZO
+FINL: MOV AH, 00H
+FINR: RET
+
+;programa
+ORG 2000H
+MOV AL, Char
+MOV BX, OFFSET Letras
+CALL ES_VOCAL
+FIN: HLT
+END

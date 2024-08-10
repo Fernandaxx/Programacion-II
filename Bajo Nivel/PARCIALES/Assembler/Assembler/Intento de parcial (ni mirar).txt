@@ -1,0 +1,71 @@
+ORG 1000h
+LIM EQU 10
+TablaA DW 10, 12, 3, 4, 50
+TablaB DW 1, 20, 15, 3, 35
+cant DW 0
+
+
+ORG 3000h
+subr: PUSH AX
+PUSH BX
+PUSH CX 
+PUSH DX
+MOV BX, SP
+ADD BX, 10 ; dir de retorno + 4 push
+MOV BX, [BX] ; Recupero la dir de memoria de A
+MOV CX, [BX] ; Recupero el valor de A
+CMP CX, LIM ; Comparo A con LIM
+JNS ELSE ; si A < LIM, continua, sino salta a ELSE
+MOV BX, AX ; Muevo la direccion de B a BX
+MOV AX, [BX] ; Muevo el valor de B a AX
+MOV DX, 0
+FOR: CMP CX, DX; Comparo que CX sea distinto de 0 (lo uso como dimensión lógica)
+JZ FINTHEN ; Si es 0 guarda el
+ADD AX, AX
+INC DX
+JMP FOR
+FINTHEN: MOV [BX],AX
+JMP FINTOT
+ELSE: PUSH BX
+MOV BX,AX
+MOV CX,[BX]
+POP BX
+ADD [BX],CX
+FINTOT:POP DX
+POP CX
+POP BX
+POP AX
+RET
+
+ORG 2000h
+MOV AX, OFFSET TablaB
+MOV BX, OFFSET TablaA
+MOV CL, OFFSET TablaB - OFFSET TablaA
+MOV DX,0
+recorrer: CMP CL,0
+JZ FIN
+PUSH CX
+PUSH BX
+call subr
+POP BX
+PUSH BX
+MOV BX,AX
+MOV CX, [BX]
+CMP CX,LIM + 1 
+JS SEGUIR
+INC DX
+SEGUIR: POP BX
+ADD BX,2
+ADD AX,2
+POP CX
+DEC CL
+JMP recorrer
+
+
+
+
+
+
+FIN: MOV cant, DX 
+hlt 
+end

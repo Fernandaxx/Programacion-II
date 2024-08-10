@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Main
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=in
+comment2.target=Fecha\ cargarFecha(java.util.Scanner)
+comment3.params=in
+comment3.target=Simple\ cargarSimple(java.util.Scanner)
+comment4.params=cant\ in
+comment4.target=Multiples\ cargarMultiples(int,\ java.util.Scanner)
+numComments=5

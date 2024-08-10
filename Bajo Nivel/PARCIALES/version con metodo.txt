@@ -1,0 +1,77 @@
+ORG 1000H ; Datos
+nombre DB "TomasJoaquin"
+fin_nombre db ?
+vocales DB "aeiouAEIOU"
+fin_tabla DB ?
+cantidad_vocales DB 0
+
+ORG 3000H
+; Recibe las referencias en CX y DX
+SWAP: PUSH AX
+PUSH BX
+MOV BX, CX
+MOV AL, [BX] ; V1
+MOV BX, DX
+MOV AH, [BX] ; V2
+MOV [BX], AL ; V1 -> V2
+MOV BX, CX
+MOV [BX], AH ; V2 -> V1
+POP BX
+POP AX
+RET
+
+; Toma por valor por valor por pila, resultado en AL 0FFh si es vocal, 00h si no
+ES_VOCAL: PUSH BX
+MOV BX, SP
+ADD BX, 4
+MOV AH, [BX]
+MOV AL, 00h
+MOV BX, OFFSET vocales
+lazo: CMP AH, [BX]
+JZ vocal
+INC BX
+CMP BX, OFFSET fin_tabla
+JNZ lazo
+JZ fin
+vocal: MOV AL, 0FFh
+fin: POP BX
+RET
+
+; Recibe en AL 00h o 0FFh dependiendo de si la letra es vocal o no e incrementa el contador en memoria 
+; No es necesario que sea reusable
+INCREMENTAR_CONTADOR: CMP AL, 00
+JZ fin_contador
+MOV BL, cantidad_vocales 
+INC BL 
+MOV cantidad_vocales, BL
+fin_contador: ret
+
+ORG 2000H
+MOV CX, OFFSET nombre ; Cabeza
+MOV DX, OFFSET fin_nombre - 1 ; Cola
+
+repeat: CALL SWAP
+; vemos si C apunta a vocal
+MOV BX, CX
+MOV AL, [BX]
+PUSH AX
+CALL ES_VOCAL
+CALL INCREMENTAR_CONTADOR
+; vemos si D apunta a vocal
+sig_letra: MOV BX, DX
+MOV AL, [BX]
+PUSH AX
+CALL ES_VOCAL
+CALL INCREMENTAR_CONTADOR
+
+saltear: INC CX
+DEC DX
+CMP CX, DX
+JS repeat
+; Si apuntan a la letra del medio porque la cantidad era impar, nos fijamos si es vocal una ultima vez
+CMP CX, DX
+JZ sig_letra
+
+
+HLT
+END

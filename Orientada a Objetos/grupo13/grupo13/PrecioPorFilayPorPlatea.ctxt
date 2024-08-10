@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=PrecioPorFilayPorPlatea
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ PrecioPorFilayPorPlatea\ here.\r\n\ \r\n\ @author\ (Leandro\ Romanut)\ \r\n\ @version\ (1.0)\r\n
+comment1.params=
+comment1.target=PrecioPorFilayPorPlatea()
+comment2.params=fila\ platea
+comment2.target=double\ obtenerPrecioBaseEntrada(int,\ java.lang.String)
+comment2.text=\r\n\ M\u00E9todo\ para\ saber\ el\ costo\ de\ una\ entrada\ seg\u00FAn\ fila\ y\ platea\r\n\ \r\n\ @params\ fila\ y\ platea\r\n\ @return\ double\r\n
+numComments=3

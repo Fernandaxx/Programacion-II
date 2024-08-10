@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=ProgramaPrincipal
+comment1.params=
+comment1.target=void\ main()
+comment2.params=in
+comment2.target=CuentaBancaria\ ingresoCuenta(java.util.Scanner)
+comment3.params=in\ numCuenta\ cbu\ alias\ dinero\ propietario
+comment3.target=CajaDeAhorro\ ingresoCDA(java.util.Scanner,\ int,\ int,\ java.lang.String,\ double,\ Propietario)
+comment4.params=in\ numCuenta\ cbu\ alias\ dinero\ propietario
+comment4.target=CuentaCorriente\ ingresoCC(java.util.Scanner,\ int,\ int,\ java.lang.String,\ double,\ Propietario)
+numComments=5

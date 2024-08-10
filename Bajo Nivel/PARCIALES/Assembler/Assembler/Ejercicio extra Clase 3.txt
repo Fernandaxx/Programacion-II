@@ -1,0 +1,37 @@
+org 1000h
+A DW 1,2,5,4,7
+B DW 2,3,4,5,7
+
+org 3000h
+greaterThan: PUSH DX ; Apilo DX para que la subrutina sea reutilizable
+MOV DX,[BX] ; Obtengo el valor de A
+CMP DX, CX ; Comparo el valor de A con el valor de B
+JC FIN ; Si la resta de A-B da carry signifca que A < B
+MOV [BX], CX ; Guardo el valor de B en la direccion de A
+FIN: POP DX ; Recupero el contexto del registro DX
+RET
+org 2000h
+
+MOV AX, OFFSET A
+MOV BX, OFFSET B
+MOV DL, OFFSET B - OFFSET A
+MOV DH, 0
+
+LAZO:CMP DL,0
+JZ FINT
+
+MOV CX, [BX] ; Paso el contenido de B a CX
+PUSH BX ; Me guardo la direccion de memoria de B en la pila
+MOV BX, AX ; Le paso la direccion de memoria de A, a BX para pasarlo por parametro
+
+CALL greaterThan ; Llamo a la subrutina
+POP BX ; Recupero la direccion de memoria de B al registro BX
+ADD BX,2  ; Suma 2 a la direccion de memoria de B
+ADD AX,2 ; Avanzo 2 en la tabla, osea, 1 word, para llegar al proximo valor
+SUB DL,2 ; Decremento la dimL en 2 (Tamaño del word)
+JMP LAZO
+
+
+
+FINT:hlt 
+end

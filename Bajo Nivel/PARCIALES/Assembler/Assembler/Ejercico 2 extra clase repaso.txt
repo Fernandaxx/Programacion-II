@@ -1,0 +1,58 @@
+org 1000h
+TablaA DB  1,2,5,4,30
+TablaB DB  1, 7, 5, 9, 7
+mayorA10 DB 0
+
+
+org 3000h
+subr: PUSH CX
+PUSH BX
+PUSH AX
+MOV AH, 1 ; Inicializo la variable res
+MOV CL, [BX] ; Muevo el contenido de la direccion de memoria de B a CL
+FOR: ADD AH,AH
+ADC AH,0
+INC AL
+CMP AL,CL
+JNZ FOR
+
+MOV [BX], AH ; Guardo res en el contenido de B
+POP AX
+POP BX
+POP CX
+RET
+
+
+
+
+
+org 2000h
+MOV CX, OFFSET TablaA
+MOV BX, OFFSET TablaB
+MOV DL, OFFSET TablaB - OFFSET TablaA
+MOV DH,0
+
+FOR2: CMP DL, 0
+JZ FIN2
+PUSH BX
+MOV BX, CX
+MOV AL, [BX]
+POP BX
+MOV AH, [BX]
+CMP AL,AH
+JNS CONTINUE
+
+call subr
+
+CONTINUE:MOV AH, [BX]
+CMP AH, 10
+JNS CONTINUE2
+ADD DH, AH
+CONTINUE2:INC CX
+INC BX
+DEC DL
+JMP FOR2
+
+FIN2: MOV mayorA10, DH
+hlt
+end
